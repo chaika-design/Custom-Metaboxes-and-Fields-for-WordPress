@@ -560,6 +560,37 @@ class cmb_Meta_Box_types {
 		return $this->select( array( 'options' => $options ) );
 	}
 
+	public function post_type_select() {
+		// global
+		global $post;
+		$options = '';
+		$save_link_id = $this->field->args( 'default' );
+		$post_type = $this->field->args( 'post_type' );
+		if(!$post_type) {
+			$post_type = null;
+		}
+
+		// vars
+		$args = array(
+			'numberposts' => -1,
+			'post_type' => $post_type,
+			'orderby' => 'post_date',
+			'order' => 'DESC',
+			'post_status' => array('publish', 'private', 'draft', 'inherit', 'future'),
+			'suppress_filters' => false,
+		);
+		$posts = get_posts( $args );
+
+		if($posts) {
+			foreach( $posts as $p ) {
+				$selected = $save_link_id == $p->ID;
+				$options .= $this->option( $p->post_title, $p->ID, $selected );
+			}
+		}
+
+		return $this->select( array( 'options' => $options ) );
+	}
+
 	public function radio( $args = array(), $type = 'radio' ) {
 		extract( $this->parse_args( $args, $type, array(
 			'class'   => 'cmb_radio_list cmb_list',

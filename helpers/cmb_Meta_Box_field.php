@@ -283,6 +283,7 @@ class cmb_Meta_Box_field {
 			'taxonomy_radio',
 			'taxonomy_select',
 			'taxonomy_multicheck',
+			'post_type_select',
 		) );
 	}
 
