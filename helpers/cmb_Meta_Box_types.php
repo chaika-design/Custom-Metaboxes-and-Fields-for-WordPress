@@ -564,7 +564,7 @@ class cmb_Meta_Box_types {
 		// global
 		global $post;
 		$options = '';
-		$save_link_id = $this->field->args( 'default' );
+		$save_link_id = $this->field->escaped_value();
 		$post_type = $this->field->args( 'post_type' );
 		if(!$post_type) {
 			$post_type = null;
